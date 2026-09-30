@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informal Worker Credit Scoring & Verification Platform | IEEE Research</title>
+  <meta name="description" content="Explainable Machine Learning Underwriting Engine for Micro-Loan Eligibility using UPI Transaction and Mobile Recharge Behavioral Signals. Compliant with RBI Microfinance Directions and DPDP Act 2023.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==================== INSTITUTIONAL TOPBAR ==================== -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="institution-brand">
+        <div class="gov-crest">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="brand-titles">
+          <div class="brand-institution">Presidency University • School of Computer Science & Engineering</div>
+          <h1 class="brand-system-name">Informal Worker Credit Scoring & Verification Platform</h1>
+          <div class="brand-meta">IEEE Simulation Framework • UPI & Telecom Behavioral Analytics</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Institutional Status Telemetry -->
+    <div class="header-right">
+      <div class="telemetry-item">
+        <span class="telemetry-label">REGULATORY FRAMEWORK</span>
+        <span class="telemetry-val highlight">RBI Microfinance 2022 (50% DTI Cap)</span>
+      </div>
+      <div class="telemetry-divider"></div>
+      <div class="telemetry-item">
+        <span class="telemetry-label">MODEL SPECIFICATION</span>
+        <span class="telemetry-val">XGBoost v2.1 + TreeSHAP</span>
+      </div>
+      <div class="telemetry-divider"></div>
+      <div class="telemetry-item">
+        <span class="telemetry-label">VALIDATION COHORT</span>
+        <span class="telemetry-val">N=10,000 (AUC 0.7214)</span>
+      </div>
+      <div class="telemetry-divider"></div>
+      <div class="telemetry-badge">
+        <span class="status-dot-pulse"></span>
+        <span>DPDP-AA CONSENT VALIDATED</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== FORMAL NAVIGATION BAR ==================== -->
+  <div class="nav-container">
+    <nav class="nav-tabs" role="tablist">
+      <button class="nav-tab active" data-tab="simulator" id="tab-btn-sim">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+          <line x1="8" y1="21" x2="16" y2="21"></line>
+          <line x1="12" y1="17" x2="12" y2="21"></line>
+        </svg>
+        <span>Underwriting Terminal</span>
+      </button>
+
+      <button class="nav-tab" data-tab="metrics" id="tab-btn-metrics">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="20" x2="18" y2="10"></line>
+          <line x1="12" y1="20" x2="12" y2="4"></line>
+          <line x1="6" y1="20" x2="6" y2="14"></line>
+        </svg>
+        <span>Empirical Benchmarks (Tables I–VII)</span>
+      </button>
+
+      <button class="nav-tab" data-tab="figures" id="tab-btn-figs">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="2 17 12 22 22 17"></polyline>
+          <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+        <span>Diagnostic Curves & Visuals</span>
+      </button>
+
+      <button class="nav-tab" data-tab="cohort" id="tab-btn-cohort">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+        <span>Applicant Registry (N=10,000)</span>
+      </button>
+
+      <button class="nav-tab" data-tab="regulatory" id="tab-btn-regulatory">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        <span>Regulatory & Governance Audit</span>
+      </button>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="btn-memo-action" id="btn-open-memo-top">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        <span>Generate Credit Appraisal Memo</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN CONTENT CONTAINER ==================== -->
+  <main class="main-container">
+
+    <!-- ================================================================ -->
+    <!-- TAB 1: FORMAL UNDERWRITING TERMINAL                             -->
+    <!-- ================================================================ -->
+    <section id="tab-simulator" class="tab-pane active">
+      
+      <!-- Institutional Dossier Context Bar -->
+      <div class="dossier-bar">
+        <div class="dossier-meta-group">
+          <div class="dossier-field">
+            <span class="d-label">CASE DOSSIER REF:</span>
+            <span class="d-value font-mono" id="disp-case-id">UW-2026-IND-8841</span>
+          </div>
+          <div class="dossier-divider"></div>
+          <div class="dossier-field">
+            <span class="d-label">ANALYSIS WINDOW:</span>
+            <span class="d-value">90-Day Trailing (Jan 01, 2024 – Mar 31, 2024)</span>
+          </div>
+          <div class="dossier-divider"></div>
+          <div class="dossier-field">
+            <span class="d-label">CONSENT ARTIFACT:</span>
+            <span class="d-value font-mono">DPDP-AA-VERIFIED-9082</span>
+          </div>
+          <div class="dossier-divider"></div>
+          <div class="dossier-field">
+            <span class="d-label">UNDERWRITING ENGINE:</span>
+            <span class="d-value">XGBoost-TreeSHAP Core</span>
+          </div>
+        </div>
+
+        <div class="archetype-cluster">
+          <span class="archetype-label">LOAD BORROWER ARCHETYPE:</span>
+          <div class="archetype-buttons">
+            <button class="arch-btn active" data-persona="vendor">
+              <span class="arch-code">TR-1</span>
+              <span>Street Vendor</span>
+            </button>
+            <button class="arch-btn" data-persona="gig">
+              <span class="arch-code">TR-2</span>
+              <span>Gig Delivery Partner</span>
+            </button>
+            <button class="arch-btn" data-persona="domestic">
+              <span class="arch-code">TR-3</span>
+              <span>Domestic Service Worker</span>
+            </button>
+            <button class="arch-btn" data-persona="labourer">
+              <span class="arch-code">TR-4</span>
+              <span>Daily-Wage Labourer</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Operational Terminal Grid -->
+      <div class="workbench-grid">
+
+        <!-- Left Column: Input Telemetry Panel -->
+        <div class="panel-card input-workbench">
+          <div class="panel-title-bar">
+            <div>
+              <h2 class="panel-heading">Applicant Behavioral Signals & Telemetry</h2>
+              <p class="panel-sub">Consented transaction logs over trailing 90 days ingested via Account Aggregator sandbox.</p>
+            </div>
+            <span class="formal-tag">FEATURE MATRIX: 24 DIMS</span>
+          </div>
+
+          <form id="sim-form" class="telemetry-form" onsubmit="return false;">
+            
+            <!-- Group 1: Demographic & Income Profile -->
+            <div class="form-section">
+              <div class="section-title">
+                <span class="sec-number">01</span>
+                <span>Demographic & Revenue Footprint</span>
+              </div>
+              
+              <div class="grid-2-col">
+                <div class="form-field">
+                  <label for="inp-workertype">Occupational Classification</label>
+                  <select id="inp-workertype" class="formal-select">
+                    <option value="street_vendor" selected>Street Vendor (Micro-Retail)</option>
+                    <option value="gig_delivery">Gig / Delivery Partner (Logistics)</option>
+                    <option value="domestic_worker">Domestic Service Worker (Homecare)</option>
+                    <option value="daily_wage_labourer">Daily-Wage Labourer (Construction/Trade)</option>
+                  </select>
+                </div>
+
+                <div class="form-field">
+                  <label for="inp-income">Estimated Monthly Inflow (₹ INR)</label>
+                  <div class="input-with-affix">
+                    <span class="input-prefix">₹</span>
+                    <input type="number" id="inp-income" class="formal-input" value="14000" min="2000" max="80000" step="500">
+                    <span class="input-suffix">/ month</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Group 2: UPI Velocity & Regularity -->
+            <div class="form-section">
+              <div class="section-title">
+                <span class="sec-number">02</span>
+                <span>UPI Transaction Cadence & Network Volatility</span>
+              </div>
+
+              <div class="grid-2-col">
+                <div class="form-field">
+                  <div class="field-label-split">
+                    <label for="inp-upi-txns">Weekly Transaction Frequency</label>
+                    <span class="val-pill font-mono" id="val-upi-txns">15 txns/wk</span>
+                  </div>
+                  <input type="range" id="inp-upi-txns" min="0" max="40" value="15" class="formal-slider">
+                  <span class="field-hint">Activity proxy; benchmark: &gt;10 txns/wk signifies active commercial trade.</span>
+                </div>
+
+                <div class="form-field">
+                  <div class="field-label-split">
+                    <label for="inp-inflow-cv">Inflow Volatility (CV of Weekly Inflow)</label>
+                    <span class="val-pill font-mono" id="val-inflow-cv">0.35 (Stable)</span>
+                  </div>
+                  <input type="range" id="inp-inflow-cv" min="0.05" max="1.50" step="0.05" value="0.35" class="formal-slider">
+                  <span class="field-hint">Std Dev / Mean. Lower coefficient of variation reflects income consistency.</span>
+                </div>
+              </div>
+
+              <div class="grid-2-col mt-4">
+                <div class="form-field">
+                  <div class="field-label-split">
+                    <label for="inp-counterparties">Distinct Monthly Payers / Counterparties</label>
+                    <span class="val-pill font-mono" id="val-counterparties">20 unique</span>
+                  </div>
+                  <input type="range" id="inp-counterparties" min="0" max="60" value="20" class="formal-slider">
+                  <span class="field-hint">Customer base breadth. High counterparty dispersion reflects diversified revenue.</span>
+                </div>
+
+                <div class="form-field">
+                  <div class="field-label-split">
+                    <label for="inp-inflow-ratio">Inflow-to-Outflow Liquidity Ratio</label>
+                    <span class="val-pill font-mono" id="val-inflow-ratio">1.25x</span>
+                  </div>
+                  <input type="range" id="inp-inflow-ratio" min="0.4" max="2.5" step="0.05" value="1.25" class="formal-slider">
+                  <span class="field-hint">Ratio &gt; 1.0 indicates net capital surplus after operating expenditures.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Group 3: Telecom Recharge Behavioral Telemetry -->
+            <div class="form-section">
+              <div class="section-title">
+                <span class="sec-number">03</span>
+                <span>Prepaid Telecom Recharge Behavioral Disciplines</span>
+              </div>
+
+              <div class="grid-3-col">
+                <div class="form-field">
+                  <div class="field-label-split">
+                    <label for="inp-rch-freq">Monthly Recharges</label>
+                    <span class="val-pill font-mono" id="val-rch-freq">1.4 / mo</span>
+                  </div>
+                  <input type="range" id="inp-rch-freq" min="0.2" max="4.0" step="0.1" value="1.4" class="formal-slider">
+                </div>
+
+                <div class="form-field">
+                  <div class="field-label-split">
+                    <label for="inp-rch-plan">Mean Plan Value</label>
+                    <span class="val-pill font-mono" id="val-rch-plan">₹239</span>
+                  </div>
+                  <input type="range" id="inp-rch-plan" min="19" max="799" step="10" value="239" class="formal-slider">
+                </div>
+
+                <div class="form-field">
+                  <div class="field-label-split">
+                    <label for="inp-rch-interval">Recharge Jitter (Days Std)</label>
+                    <span class="val-pill font-mono" id="val-rch-interval">3.5 days (Regular)</span>
+                  </div>
+                  <input type="range" id="inp-rch-interval" min="0.5" max="15" step="0.5" value="3.5" class="formal-slider">
+                </div>
+              </div>
+              <span class="field-hint">Telecom regularity serves as a verified proxy for behavioral discipline and cash planning habits.</span>
+            </div>
+
+            <!-- Group 4: Debt Servicing & Micro-Loan Terms -->
+            <div class="form-section">
+              <div class="section-title">
+                <span class="sec-number">04</span>
+                <span>Existing Obligations & Proposed Micro-Loan Terms</span>
+              </div>
+
+              <div class="grid-2-col">
+                <div class="form-field">
+                  <label for="inp-emi-count">Observed Recurring Commitments (Fixed Debits)</label>
+                  <select id="inp-emi-count" class="formal-select">
+                    <option value="0">0 Commitments (Unencumbered Cashflow)</option>
+                    <option value="1" selected>1 Active Micro-Chit / Fixed Debit (₹500/mo)</option>
+                    <option value="2">2 Active Commitments (Moderate Leverage)</option>
+                    <option value="3">3+ Active Commitments (Elevated Debt Burden)</option>
+                  </select>
+                </div>
+
+                <div class="form-field">
+                  <label for="inp-loan-request">Proposed Micro-Credit Facility Amount</label>
+                  <div class="input-with-affix">
+                    <span class="input-prefix">₹</span>
+                    <input type="number" id="inp-loan-request" class="formal-input" value="15000" min="2000" max="60000" step="1000">
+                    <span class="input-suffix">Tenor: 4 Mo</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- Right Column: Formal Appraisal Output Panel -->
+        <div class="panel-card decision-workbench">
+          <div class="panel-title-bar">
+            <div>
+              <h2 class="panel-heading">Credit Appraisal & Risk Assessment</h2>
+              <p class="panel-sub">Algorithmic evaluation per Eq. (1) with RBI Debt-to-Income compliance verification.</p>
+            </div>
+            <div class="tier-indicator-badge" id="badge-tier">ELIGIBLE</div>
+          </div>
+
+          <!-- Executive Score & Risk Callout -->
+          <div class="appraisal-summary-card">
+            <div class="score-dial-wrap">
+              <div class="score-circular-metric">
+                <svg viewBox="0 0 160 160" class="circular-chart">
+                  <path class="circle-bg" d="M 80, 20 a 60,60 0 0 1 0,120 a 60,60 0 0 1 0,-120"/>
+                  <path id="circle-bar" class="circle-fill" stroke-dasharray="377" stroke-dashoffset="90" d="M 80, 20 a 60,60 0 0 1 0,120 a 60,60 0 0 1 0,-120"/>
+                </svg>
+                <div class="circle-inner-data">
+                  <div class="score-headline font-mono" id="res-score">76</div>
+                  <div class="score-subtext">SCORE / 100</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="appraisal-core-metrics">
+              <div class="kpi-block">
+                <span class="kpi-heading">ASSIGNED UNDERWRITING TIER</span>
+                <span class="kpi-data-val" id="res-tier-name">Eligible (Score &ge; 70)</span>
+                <span class="kpi-subtext" id="res-tier-sub">Instant Sanction Permitted</span>
+              </div>
+
+              <div class="kpi-row-dual">
+                <div class="kpi-subblock">
+                  <span class="kpi-heading">PREDICTED DEFAULT PROBABILITY (p̂)</span>
+                  <span class="kpi-data-val font-mono" id="res-prob">24.0%</span>
+                </div>
+                <div class="kpi-subblock">
+                  <span class="kpi-heading">HISTORICAL COHORT DEFAULT</span>
+                  <span class="kpi-data-val font-mono" id="res-cohort-default">14.8%</span>
+                </div>
+              </div>
+
+              <div class="kpi-block highlight-box">
+                <span class="kpi-heading">RECOMMENDED CREDIT CEILING</span>
+                <span class="kpi-data-val font-mono" id="res-loan-limit">₹25,000</span>
+                <span class="kpi-subtext">Recommended Tenor: 3 to 6 Months (PM SVANidhi Model)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- RBI Microfinance Compliance Audit Module -->
+          <div class="rbi-compliance-card" id="rbi-compliance-status">
+            <div class="rbi-header">
+              <div class="rbi-badge-pill">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span>RBI MICROFINANCE OBLIGATION AUDIT</span>
+              </div>
+              <span class="rbi-status font-mono" id="rbi-status-label">COMPLIANT (12.4% &le; 50%)</span>
+            </div>
+
+            <p class="rbi-desc">
+              Per <strong>RBI Master Direction RBI/DoR/2021-22/89</strong>, total monthly loan repayment obligations across all lenders must not exceed <strong>50%</strong> of verified monthly household inflow.
+            </p>
+
+            <div class="rbi-audit-grid">
+              <div class="audit-cell">
+                <span class="ac-label">Verified Monthly Inflow</span>
+                <span class="ac-value font-mono" id="rbi-inflow">₹14,000</span>
+              </div>
+              <div class="audit-cell">
+                <span class="ac-label">Total Debt Service / Mo</span>
+                <span class="ac-value font-mono" id="rbi-obligations">₹1,750</span>
+              </div>
+              <div class="audit-cell">
+                <span class="ac-label">Computed DTI Ratio</span>
+                <span class="ac-value font-mono" id="rbi-dti">12.5%</span>
+              </div>
+              <div class="audit-cell">
+                <span class="ac-label">Statutory Ceiling</span>
+                <span class="ac-value font-mono">50.0% Max</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- TreeSHAP Score Point Attribution Table -->
+          <div class="shap-table-container">
+            <div class="shap-header-row">
+              <div>
+                <h3 class="shap-title">TreeSHAP Actuarial Score Attribution</h3>
+                <p class="shap-subtitle">Local linear slope conversion: Score Delta = &phi;<sub>i</sub> &times; [-100 &middot; p̂(1 - p̂)]</p>
+              </div>
+              <span class="formal-tag font-mono">Top-5 Drivers</span>
+            </div>
+
+            <table class="actuarial-table">
+              <thead>
+                <tr>
+                  <th>Behavioral Signal</th>
+                  <th>Observed Value</th>
+                  <th>SHAP Log-Odds (&phi;)</th>
+                  <th>Score Impact</th>
+                  <th>Actuarial Finding</th>
+                </tr>
+              </thead>
+              <tbody id="shap-table-body">
+                <!-- Dynamically populated via JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Action Command Bar -->
+          <div class="decision-action-bar">
+            <button class="btn-primary" id="btn-generate-memo">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+              </svg>
+              <span>Export Formal Credit Appraisal Memo (PDF/Print)</span>
+            </button>
+            <button class="btn-secondary" id="btn-reset-form">Reset Form</button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- TAB 2: EMPIRICAL BENCHMARKS (TABLES I-VII)                      -->
+    <!-- ================================================================ -->
+    <section id="tab-metrics" class="tab-pane">
+      <div class="section-hero">
+        <div class="hero-header-group">
+          <span class="hero-badge">STATISTICAL VALIDATION</span>
+          <h2 class="hero-title">Empirical Benchmark Evaluations & Comparative Baselines</h2>
+          <p class="hero-description">
+            Complete empirical performance results on held-out synthetic test set (N=2,000, 80/20 stratified split). 
+            Evaluates discrimination (AUC), accuracy, precision, recall, F1, and probability calibration error (Brier score).
+          </p>
+        </div>
+      </div>
+
+      <!-- KPI Summary Cards -->
+      <div class="kpi-cards-grid">
+        <div class="kpi-metric-card">
+          <div class="kpi-card-header">
+            <span class="card-metric-title">XGBOOST TEST ROC AUC</span>
+            <span class="card-status-tag">Primary Metric</span>
+          </div>
+          <div class="card-big-metric font-mono" id="kpi-auc">0.7214</div>
+          <div class="card-detail-text">5-Seed Cross-Validation Mean: <strong>0.7263 &plusmn; 0.0087</strong></div>
+        </div>
+
+        <div class="kpi-metric-card">
+          <div class="kpi-card-header">
+            <span class="card-metric-title">CALIBRATED BRIER SCORE</span>
+            <span class="card-status-tag success">Post-Isotonic</span>
+          </div>
+          <div class="card-big-metric font-mono" id="kpi-brier">0.2024</div>
+          <div class="card-detail-text">Refined from 0.2072 via Isotonic Regression</div>
+        </div>
+
+        <div class="kpi-metric-card">
+          <div class="kpi-card-header">
+            <span class="card-metric-title">COLD-START AUC (&lt;15 TXNS)</span>
+            <span class="card-status-tag warning">Thin-File</span>
+          </div>
+          <div class="card-big-metric font-mono" id="kpi-cold">0.5468</div>
+          <div class="card-detail-text">+0.0342 AUC improvement from telecom recharge data</div>
+        </div>
+
+        <div class="kpi-metric-card">
+          <div class="kpi-card-header">
+            <span class="card-metric-title">TIER MONOTONICITY</span>
+            <span class="card-status-tag verified">Verified</span>
+          </div>
+          <div class="card-big-metric font-mono text-emerald">Strict Monotonic</div>
+          <div class="card-detail-text">Default rate: High 82.6% &rarr; Review 46.7% &rarr; Eligible 14.8%</div>
+        </div>
+      </div>
+
+      <!-- Benchmark Table: Primary Held-Out Metrics (Table IV) -->
+      <div class="panel-card mb-6">
+        <div class="panel-title-bar">
+          <div>
+            <h3 class="panel-heading">Table IV: Held-Out Test Set Metrics (Synthetic Data, N = 2,000)</h3>
+            <p class="panel-sub">Performance comparison between proposed XGBoost model and established underwriting baselines.</p>
+          </div>
+          <span class="formal-tag font-mono">Stratified 80/20 Split</span>
+        </div>
+        <div class="table-responsive">
+          <table class="formal-data-table" id="table-main-metrics">
+            <thead>
+              <tr>
+                <th>Model Architecture</th>
+                <th>ROC AUC</th>
+                <th>Accuracy</th>
+                <th>Precision</th>
+                <th>Recall</th>
+                <th>F1 Score</th>
+                <th>Brier Score</th>
+              </tr>
+            </thead>
+            <tbody><!-- Injected via JS --></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Dual Grid: Tier Stats (Table VI) & Modality Ablation (Table VII) -->
+      <div class="grid-2-col mb-6">
+        <div class="panel-card">
+          <div class="panel-title-bar">
+            <div>
+              <h3 class="panel-heading">Table VI: Default Rate by Score Tier</h3>
+              <p class="panel-sub">Applicant distribution and default incidence across the three decision tiers.</p>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="formal-data-table">
+              <thead>
+                <tr>
+                  <th>Decision Tier</th>
+                  <th>Score Boundary</th>
+                  <th>Applicant Count</th>
+                  <th>Default Rate</th>
+                  <th>Mean Score</th>
+                </tr>
+              </thead>
+              <tbody id="table-tier-stats"><!-- Injected via JS --></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel-card">
+          <div class="panel-title-bar">
+            <div>
+              <h3 class="panel-heading">Table VII: Feature Modality Ablation</h3>
+              <p class="panel-sub">Quantifying independent & joint contribution of UPI vs Telecom modalities.</p>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="formal-data-table">
+              <thead>
+                <tr>
+                  <th>Feature Modality</th>
+                  <th>ROC AUC</th>
+                  <th>Brier Score</th>
+                  <th>5-Fold CV AUC</th>
+                  <th>Cold-Start AUC</th>
+                </tr>
+              </thead>
+              <tbody id="table-ablation"><!-- Injected via JS --></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Multi-Seed Stability (Table V) -->
+      <div class="panel-card mb-6">
+        <div class="panel-title-bar">
+          <div>
+            <h3 class="panel-heading">Table V: Five-Seed Replicability & Stability Analysis</h3>
+            <p class="panel-sub">Evaluating variance in test AUC across 5 independent random splits and model seeds.</p>
+          </div>
+          <span class="formal-tag">STABILITY: &plusmn; 0.0087</span>
+        </div>
+        <div class="table-responsive">
+          <table class="formal-data-table">
+            <thead>
+              <tr>
+                <th>Architecture</th>
+                <th>Seed 42</th>
+                <th>Seed 123</th>
+                <th>Seed 456</th>
+                <th>Seed 789</th>
+                <th>Seed 999</th>
+                <th>Mean &plusmn; Std Dev</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>XGBoost (Proposed)</strong></td>
+                <td class="font-mono">0.7234</td>
+                <td class="font-mono">0.7331</td>
+                <td class="font-mono">0.7169</td>
+                <td class="font-mono">0.7388</td>
+                <td class="font-mono">0.7192</td>
+                <td class="font-mono font-bold text-blue">0.7263 &plusmn; 0.0087</td>
+              </tr>
+              <tr>
+                <td>Logistic Regression Scorecard</td>
+                <td class="font-mono">0.6977</td>
+                <td class="font-mono">0.7159</td>
+                <td class="font-mono">0.6781</td>
+                <td class="font-mono">0.6833</td>
+                <td class="font-mono">0.6917</td>
+                <td class="font-mono">0.6933 &plusmn; 0.0135</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Published Literature Context (Table I / Related Work) -->
+      <div class="panel-card">
+        <div class="panel-title-bar">
+          <div>
+            <h3 class="panel-heading">Contextual Benchmark Against Published Alternative Scoring Literature</h3>
+            <p class="panel-sub">Contextual comparison with peer systems (different datasets; provided for methodological benchmarking).</p>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="formal-data-table" id="table-ext-ref">
+            <thead>
+              <tr>
+                <th>Published Study</th>
+                <th>Target Population</th>
+                <th>Data Modality</th>
+                <th>Reported AUC</th>
+                <th>Brier Score</th>
+                <th>Key Architectural Difference</th>
+              </tr>
+            </thead>
+            <tbody><!-- Injected via JS --></tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- TAB 3: DIAGNOSTIC CURVES & VISUALS                              -->
+    <!-- ================================================================ -->
+    <section id="tab-figures" class="tab-pane">
+      <div class="section-hero">
+        <div class="hero-header-group">
+          <span class="hero-badge">DIAGNOSTIC EVIDENCE</span>
+          <h2 class="hero-title">Diagnostic Visualizations & Model Explainability</h2>
+          <p class="hero-description">
+            High-resolution empirical figures generated during research simulation. Click any chart to view enlarged high-resolution view.
+          </p>
+        </div>
+      </div>
+
+      <div class="figures-gallery-grid">
+        <div class="fig-card" data-fig="results/figs/roc_curves.png" data-title="Figure 2(a): ROC Discrimination Curves">
+          <div class="fig-preview-box">
+            <img src="results/figs/roc_curves.png" alt="ROC Curves" class="fig-img" loading="lazy">
+          </div>
+          <div class="fig-caption">
+            <span class="fig-tag">Discrimination</span>
+            <h4>Fig. 2(a): Receiver Operating Characteristic Curves</h4>
+            <p>XGBoost achieves 0.7214 AUC on the held-out test set, outperforming Logistic Regression (0.6977) and Random Forest (0.6993).</p>
+          </div>
+        </div>
+
+        <div class="fig-card" data-fig="results/figs/calibration.png" data-title="Figure 2(b): Calibration & Reliability Curve">
+          <div class="fig-preview-box">
+            <img src="results/figs/calibration.png" alt="Calibration" class="fig-img" loading="lazy">
+          </div>
+          <div class="fig-caption">
+            <span class="fig-tag">Calibration</span>
+            <h4>Fig. 2(b): Reliability Curve (Pre vs Post Isotonic)</h4>
+            <p>Isotonic calibration lowers Brier score from 0.2072 to 0.2024, ensuring predicted probabilities align with true default frequencies.</p>
+          </div>
+        </div>
+
+        <div class="fig-card" data-fig="results/figs/score_distribution.png" data-title="Figure 3: Score Distribution by True Class">
+          <div class="fig-preview-box">
+            <img src="results/figs/score_distribution.png" alt="Score Distribution" class="fig-img" loading="lazy">
+          </div>
+          <div class="fig-caption">
+            <span class="fig-tag">Separation</span>
+            <h4>Fig. 3: Score Distribution by True Class</h4>
+            <p>Bimodal density separation showing default concentration below score 40 and repaid borrowers clustered in score 70+.</p>
+          </div>
+        </div>
+
+        <div class="fig-card" data-fig="results/figs/tier_analysis.png" data-title="Figure 3(b): Score Tier Analysis">
+          <div class="fig-preview-box">
+            <img src="results/figs/tier_analysis.png" alt="Tier Analysis" class="fig-img" loading="lazy">
+          </div>
+          <div class="fig-caption">
+            <span class="fig-tag">Routing</span>
+            <h4>Score Tier Monotonicity & Allocation</h4>
+            <p>Demonstrates monotonic risk progression: Eligible (14.8% default), Review (46.7%), and High Risk (82.6%).</p>
+          </div>
+        </div>
+
+        <div class="fig-card" data-fig="results/figs/ablation.png" data-title="Figure 4: Signal Modality Ablation">
+          <div class="fig-preview-box">
+            <img src="results/figs/ablation.png" alt="Modality Ablation" class="fig-img" loading="lazy">
+          </div>
+          <div class="fig-caption">
+            <span class="fig-tag">Modality</span>
+            <h4>Fig. 4: Modality Ablation (UPI vs Telecom)</h4>
+            <p>Shows that UPI drives the bulk of discrimination (AUC 0.7124), while recharge adds an incremental +0.0110 AUC lift.</p>
+          </div>
+        </div>
+
+        <div class="fig-card" data-fig="results/figs/shap_global_bar.png" data-title="Figure 6: Global Feature Importance (SHAP)">
+          <div class="fig-preview-box">
+            <img src="results/figs/shap_global_bar.png" alt="SHAP Global Bar" class="fig-img" loading="lazy">
+          </div>
+          <div class="fig-caption">
+            <span class="fig-tag">Explainability</span>
+            <h4>Fig. 6: Global TreeSHAP Feature Importance</h4>
+            <p>Weekly UPI transaction cadence and distinct counterparties dominate global attribution, followed by income and recharge frequency.</p>
+          </div>
+        </div>
+
+        <div class="fig-card" data-fig="results/figs/shap_beeswarm.png" data-title="SHAP Beeswarm Distribution">
+          <div class="fig-preview-box">
+            <img src="results/figs/shap_beeswarm.png" alt="SHAP Beeswarm" class="fig-img" loading="lazy">
+          </div>
+          <div class="fig-caption">
+            <span class="fig-tag">Directionality</span>
+            <h4>SHAP Beeswarm Distribution Plot</h4>
+            <p>Visualizes positive vs negative impact directions across individual workers; high transaction volume reduces default odds.</p>
+          </div>
+        </div>
+
+        <div class="fig-card" data-fig="results/figs/fairness.png" data-title="Figure 5: Subgroup Approval Rates & Fairness Audit">
+          <div class="fig-preview-box">
+            <img src="results/figs/fairness.png" alt="Fairness Evaluation" class="fig-img" loading="lazy">
+          </div>
+          <div class="fig-caption">
+            <span class="fig-tag">Fairness Audit</span>
+            <h4>Fig. 5: Subgroup Approval Rates (Disparate Impact)</h4>
+            <p>Illustrates severe limitation: fixed 70-point cutoff results in 0.0% approval for low/mid income tiers (Disparate Impact Ratio = 0.0).</p>
+          </div>
+        </div>
+
+        <div class="fig-card" data-fig="results/figs/multi_seed_stability.png" data-title="5-Seed Stability Comparison">
+          <div class="fig-preview-box">
+            <img src="results/figs/multi_seed_stability.png" alt="Multi-seed Stability" class="fig-img" loading="lazy">
+          </div>
+          <div class="fig-caption">
+            <span class="fig-tag">Robustness</span>
+            <h4>Five-Seed Model Stability Comparison</h4>
+            <p>Confirms tight standard deviation across seeds (0.7263 &plusmn; 0.0087), proving results are not artefacts of random sampling.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- TAB 4: APPLICANT REGISTRY (N=10,000 COHORT)                     -->
+    <!-- ================================================================ -->
+    <section id="tab-cohort" class="tab-pane">
+      <div class="section-hero">
+        <div class="hero-header-group">
+          <span class="hero-badge">DATABASE EXPLORER</span>
+          <h2 class="hero-title">Simulated Applicant Cohort Registry</h2>
+          <p class="hero-description">
+            Explore individual simulated worker profiles from the 10,000 applicant cohort. 
+            Click "Assess in Terminal" to load an applicant's exact 90-day behavioral telemetry into the live underwriting workbench.
+          </p>
+        </div>
+        <div class="filter-controls">
+          <div class="search-input-wrap">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="cohort-search" class="formal-search-box" placeholder="Search by Worker ID or Trade...">
+          </div>
+          <select id="filter-workertype" class="formal-filter-select">
+            <option value="all">All Occupational Cohorts</option>
+            <option value="street_vendor">Street Vendor (30%)</option>
+            <option value="daily_wage_labourer">Daily-Wage Labourer (30%)</option>
+            <option value="gig_delivery">Gig / Delivery Partner (25%)</option>
+            <option value="domestic_worker">Domestic Service Worker (15%)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="panel-card">
+        <div class="table-responsive max-height-600">
+          <table class="formal-data-table" id="table-cohort">
+            <thead>
+              <tr>
+                <th>Applicant ID</th>
+                <th>Trade / Cohort</th>
+                <th>Weekly UPI Txns</th>
+                <th>Est. Monthly Inflow</th>
+                <th>Inflow Volatility (CV)</th>
+                <th>Recharge Freq</th>
+                <th>Recharge Interval Std</th>
+                <th>Historical Outcome</th>
+                <th>Underwriting Action</th>
+              </tr>
+            </thead>
+            <tbody id="cohort-tbody"><!-- Injected via JS --></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- TAB 5: REGULATORY & GOVERNANCE AUDIT                            -->
+    <!-- ================================================================ -->
+    <section id="tab-regulatory" class="tab-pane">
+      <div class="section-hero">
+        <div class="hero-header-group">
+          <span class="hero-badge">STATUTORY COMPLIANCE</span>
+          <h2 class="hero-title">Regulatory Framework, Fair Lending & Governance Disclosures</h2>
+          <p class="hero-description">
+            Analysis of legal alignment with Reserve Bank of India (RBI) microfinance regulations, the Digital Personal Data Protection (DPDP) Act, 
+            and transparent reporting of model limitations and disparate impact risks.
+          </p>
+        </div>
+      </div>
+
+      <div class="governance-grid">
+        
+        <!-- Pillar 1: RBI Compliance -->
+        <div class="gov-card">
+          <div class="gov-card-header">
+            <div class="gov-icon-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <div>
+              <h3>RBI Microfinance Framework (2022) Alignment</h3>
+              <span class="gov-cite">RBI/DoR/2021-22/89 Master Direction</span>
+            </div>
+          </div>
+          <div class="gov-card-body">
+            <p>
+              The Reserve Bank of India mandates that a household’s total monthly repayment obligation across all lending institutions cannot exceed <strong>50% of monthly household income</strong>.
+            </p>
+            <ul class="formal-bullet-list">
+              <li><strong>Algorithmic Affordability Flag:</strong> The system automatically extracts recurring debit patterns (EMI signatures) and computes whether the proposed micro-loan tranche violates the 50% statutory threshold.</li>
+              <li><strong>Advisory Integration:</strong> The score acts as an advisory input into the NBFC's board-approved underwriting policy, ensuring compliance rather than bypassing statutory caps.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Pillar 2: DPDP Act Consent -->
+        <div class="gov-card">
+          <div class="gov-card-header">
+            <div class="gov-icon-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+            </div>
+            <div>
+              <h3>DPDP Act 2023 & Account Aggregator Architecture</h3>
+              <span class="gov-cite">Consent-Driven Financial Data Ingestion</span>
+            </div>
+          </div>
+          <div class="gov-card-body">
+            <p>
+              Under the Digital Personal Data Protection Act (DPDP) 2023, access to payment logs requires purpose-bound, revocable borrower consent.
+            </p>
+            <ul class="formal-bullet-list">
+              <li><strong>RBI Account Aggregator (AA) Gateway:</strong> Real production deployments ingest UPI statement trails strictly through licensed Account Aggregator sandboxes (e.g. Setu, Finvu).</li>
+              <li><strong>Time-Bound Validity Windows:</strong> Each credit score carries a time-bound cryptographic validity window (e.g. 30 days), preventing stale data utilization without fresh consent.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Pillar 3: Fairness Audit & Disparate Impact -->
+        <div class="gov-card warning-accent">
+          <div class="gov-card-header">
+            <div class="gov-icon-badge warning">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+            </div>
+            <div>
+              <h3>Fairness Audit & Disparate Impact Failure (DIR = 0.0)</h3>
+              <span class="gov-cite">Transparent Limitation Disclosure (Sec. V-D)</span>
+            </div>
+          </div>
+          <div class="gov-card-body">
+            <p>
+              The research exposes a critical operational failure: a single global 70-point cutoff threshold results in severe disparate impact against lower-earning informal cohorts.
+            </p>
+            <ul class="formal-bullet-list">
+              <li><strong>Disparate Impact Ratio = 0.0:</strong> Approval rates for low and mid-income terciles are 0.0%, compared to 35.4% for high-income workers. By cohort: Gig Workers (36.2%), Vendors (8.9%), Daily Labourers (0.8%), Domestic Workers (0.0%).</li>
+              <li><strong>Remediation Strategy:</strong> The paper explicitly recommends <em>group-aware calibration</em> or expanding the human Review tier (40–69) to avoid algorithmic exclusion.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Pillar 4: Cold-Start Vulnerability -->
+        <div class="gov-card">
+          <div class="gov-card-header">
+            <div class="gov-icon-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+              </svg>
+            </div>
+            <div>
+              <h3>Thin-File & Cold-Start Research Findings</h3>
+              <span class="gov-cite">Applicants with &lt;15 Lifetime UPI Transactions</span>
+            </div>
+          </div>
+          <div class="gov-card-body">
+            <p>
+              For sparse-history workers (1,042 workers in the test cohort), alternative data models struggle to exceed random chance.
+            </p>
+            <ul class="formal-bullet-list">
+              <li><strong>Performance:</strong> UPI-only models achieve AUC 0.5126 (essentially random). Combining telecom recharge lifts AUC to 0.5468.</li>
+              <li><strong>Policy Conclusion:</strong> The authors candidly report that recharge data does <em>not</em> fully solve the cold-start challenge. Such applicants should be routed to progressive laddering loans (e.g. ₹5,000 PM SVANidhi tranche 1) rather than scored algorithmically.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FORMAL CREDIT APPRAISAL MEMO MODAL ==================== -->
+  <div id="memo-modal" class="modal-overlay">
+    <div class="memo-container">
+      <div class="memo-actions-header no-print">
+        <div class="memo-doc-badge">INSTITUTIONAL UNDERWRITING DOSSIER</div>
+        <div class="memo-action-btns">
+          <button class="btn-print" id="btn-print-memo">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 6 2 18 2 18 9"></polyline>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+              <rect x="6" y="14" width="12" height="8"></rect>
+            </svg>
+            <span>Print Credit Memo (PDF)</span>
+          </button>
+          <button class="btn-modal-close" id="btn-close-memo">&times;</button>
+        </div>
+      </div>
+
+      <!-- Printable Institutional Document Body -->
+      <div class="memo-body printable-doc">
+        
+        <!-- Document Header -->
+        <div class="memo-header-block">
+          <div class="memo-inst-details">
+            <div class="memo-bank-logo">PRESIDENCY INSTITUTIONAL FINANCIAL LABS</div>
+            <div class="memo-bank-sub">Center for Financial Inclusion & Alternative Underwriting Systems</div>
+            <div class="memo-title-main">CREDIT APPRAISAL MEMORANDUM (MICRO-LOAN FACILITY)</div>
+          </div>
+          <div class="memo-audit-stamp">
+            <div class="stamp-box">
+              <span class="stamp-lbl">DOC REF:</span>
+              <span class="stamp-val font-mono" id="memo-doc-ref">UW-2026-IND-8841</span>
+              <span class="stamp-lbl mt-1">DATE:</span>
+              <span class="stamp-val font-mono" id="memo-doc-date">2026-09-30</span>
+              <span class="stamp-status" id="memo-stamp-status">STATUS: ELIGIBLE</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="memo-divider-line"></div>
+
+        <!-- Section 1: Executive Underwriting Summary -->
+        <div class="memo-section">
+          <h4 class="memo-sec-title">1. EXECUTIVE UNDERWRITING SUMMARY</h4>
+          <table class="memo-formal-table">
+            <tbody>
+              <tr>
+                <td class="tbl-lbl">Borrower Identification:</td>
+                <td class="tbl-val font-mono" id="memo-borrower-id">WORKER-ID-8841</td>
+                <td class="tbl-lbl">Occupational Category:</td>
+                <td class="tbl-val font-bold" id="memo-borrower-trade">Street Vendor (Micro-Retail)</td>
+              </tr>
+              <tr>
+                <td class="tbl-lbl">Verification Protocol:</td>
+                <td class="tbl-val">DPDP-Compliant Account Aggregator</td>
+                <td class="tbl-lbl">Data Ingestion Window:</td>
+                <td class="tbl-val">90 Trailing Days (Jan 01 – Mar 31)</td>
+              </tr>
+              <tr>
+                <td class="tbl-lbl">Evaluated Credit Score:</td>
+                <td class="tbl-val font-mono font-bold text-blue" id="memo-score-val">76 / 100</td>
+                <td class="tbl-lbl">Assigned Risk Classification:</td>
+                <td class="tbl-val font-bold" id="memo-tier-val">TIER 1 — ELIGIBLE</td>
+              </tr>
+              <tr>
+                <td class="tbl-lbl">Model Default Probability (p̂):</td>
+                <td class="tbl-val font-mono" id="memo-prob-val">24.0%</td>
+                <td class="tbl-lbl">Sanction Credit Limit:</td>
+                <td class="tbl-val font-mono font-bold text-emerald" id="memo-limit-val">₹25,000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Section 2: Statutory Affordability & RBI Cap Verification -->
+        <div class="memo-section">
+          <h4 class="memo-sec-title">2. STATUTORY AFFORDABILITY & RBI DTI ASSESSMENT (RBI/DoR/2021-22/89)</h4>
+          <table class="memo-formal-table">
+            <thead>
+              <tr>
+                <th>Verified Monthly Inflow</th>
+                <th>Identified Existing Debt / Mo</th>
+                <th>Proposed Loan EMI / Mo</th>
+                <th>Total Obligation Burden</th>
+                <th>Debt-to-Income (DTI)</th>
+                <th>Statutory Compliance Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="font-mono font-bold" id="memo-rbi-inflow">₹14,000</td>
+                <td class="font-mono" id="memo-rbi-existing">₹500</td>
+                <td class="font-mono" id="memo-rbi-proposed">₹1,250</td>
+                <td class="font-mono font-bold" id="memo-rbi-total">₹1,750</td>
+                <td class="font-mono font-bold" id="memo-rbi-dti">12.5%</td>
+                <td class="font-bold text-emerald" id="memo-rbi-comp">PASS (&le; 50% RBI Limit)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Section 3: Cashflow & Behavioral Telemetry Matrix -->
+        <div class="memo-section">
+          <h4 class="memo-sec-title">3. CASHFLOW VELOCITY & TELECOM BEHAVIORAL PROFILE</h4>
+          <table class="memo-formal-table">
+            <tbody>
+              <tr>
+                <td class="tbl-lbl">Weekly UPI Frequency:</td>
+                <td class="tbl-val font-mono" id="memo-txns-val">15 txns / week</td>
+                <td class="tbl-lbl">Inflow Regularity (CV):</td>
+                <td class="tbl-val font-mono" id="memo-cv-val">0.35 (Low Volatility)</td>
+              </tr>
+              <tr>
+                <td class="tbl-lbl">Distinct Monthly Payers:</td>
+                <td class="tbl-val font-mono" id="memo-cp-val">20 unique counterparties</td>
+                <td class="tbl-lbl">Inflow-to-Outflow Multiple:</td>
+                <td class="tbl-val font-mono" id="memo-ratio-val">1.25x (Positive Liquidity)</td>
+              </tr>
+              <tr>
+                <td class="tbl-lbl">Monthly Telecom Recharges:</td>
+                <td class="tbl-val font-mono" id="memo-rch-freq-val">1.4 / month</td>
+                <td class="tbl-lbl">Mean Recharge Plan:</td>
+                <td class="tbl-val font-mono" id="memo-rch-plan-val">₹239</td>
+              </tr>
+              <tr>
+                <td class="tbl-lbl">Recharge Interval Jitter:</td>
+                <td class="tbl-val font-mono" id="memo-rch-jitter-val">3.5 days std (Predictable)</td>
+                <td class="tbl-lbl">Active Recurring Commitments:</td>
+                <td class="tbl-val font-mono" id="memo-emi-val">1 Active Fixed Debit</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Section 4: Explainable SHAP Attribution Audit -->
+        <div class="memo-section">
+          <h4 class="memo-sec-title">4. TREESHAP EXPLAINABLE DECISION AUDIT TRAIL</h4>
+          <p class="memo-text-sm">
+            Pursuant to RBI Fair Lending and Responsible AI directives, the algorithmic decision is decomposed into exact local score adjustments:
+          </p>
+          <table class="memo-formal-table">
+            <thead>
+              <tr>
+                <th>Behavioral Signal</th>
+                <th>Observed Metric</th>
+                <th>Attribution Weight (SHAP &phi;)</th>
+                <th>Score Adjustment</th>
+                <th>Risk Implication</th>
+              </tr>
+            </thead>
+            <tbody id="memo-shap-table">
+              <!-- Dynamically populated via JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Section 5: Sanction Conditions & Sign-off Block -->
+        <div class="memo-section">
+          <h4 class="memo-sec-title">5. CREDIT COMMITTEE DISPOSITION & ESCALATION TERMS</h4>
+          <div class="memo-terms-box" id="memo-terms-box">
+            <p><strong>Approved Facility:</strong> Micro-Working Capital Loan of up to <span id="memo-disp-limit">₹25,000</span> repayable in 4 equal monthly installments.</p>
+            <p><strong>Disbursement Channel:</strong> Direct UPI VPA transfer to applicant's primary transacting account.</p>
+            <p><strong>Escalation Rule:</strong> Timely repayment of Tranche 1 qualifies applicant for automatic credit limit enhancement under PM SVANidhi laddering guidelines.</p>
+          </div>
+
+          <div class="memo-sign-row">
+            <div class="sign-block">
+              <div class="sign-line"></div>
+              <span class="sign-title">Automated Underwriter</span>
+              <span class="sign-sub font-mono">XGBoost-TreeSHAP Engine v2.1</span>
+            </div>
+            <div class="sign-block">
+              <div class="sign-line"></div>
+              <span class="sign-title">Credit Risk Officer</span>
+              <span class="sign-sub">Presidency Microfinance Labs</span>
+            </div>
+            <div class="sign-block">
+              <div class="sign-line"></div>
+              <span class="sign-title">Compliance Officer</span>
+              <span class="sign-sub">RBI Microfinance Directions Audit</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Image Lightbox Modal -->
+  <div id="image-modal" class="modal-overlay">
+    <div class="img-modal-card">
+      <div class="img-modal-header">
+        <h3 id="modal-title">Diagnostic Visual Preview</h3>
+        <button id="modal-close" class="btn-modal-close">&times;</button>
+      </div>
+      <div class="img-modal-body">
+        <img id="modal-img" src="" alt="High resolution preview">
+      </div>
+      <div class="img-modal-footer">
+        <a id="modal-download" href="" download class="btn-primary">Download High-Resolution PNG</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

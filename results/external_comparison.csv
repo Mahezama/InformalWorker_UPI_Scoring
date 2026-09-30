@@ -1,0 +1,8 @@
+Reference,AUC,Brier,Note
+Yadav et al. (individual),0.765,0.195,"External, different data"
+Yadav et al. (MSME),0.784,0.184,"External, different data"
+Ots et al.,0.62,,"External, different data"
+Ng et al.,0.806,,"External, different data"
+"Ours (XGBoost, synthetic)",0.7214,0.2072,Synthetic data only
+"Ours (LR, synthetic)",0.6977,0.2162,Synthetic data only
+"Ours (RF, synthetic)",0.6993,0.2198,Synthetic data only
